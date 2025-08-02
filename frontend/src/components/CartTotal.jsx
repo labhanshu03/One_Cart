@@ -1,5 +1,7 @@
-import React from 'react'
-import { shopDataContext } from '../../context/shopContext'
+import React,{useContext} from 'react'
+import { shopDataContext } from '../../context/shopContext.jsx'
+import Title from "./Title.jsx"
+
 
 function CartTotal() {
     const {currency,delivery_fee,getCartAmount}=useContext(shopDataContext)
@@ -12,7 +14,7 @@ function CartTotal() {
         <div className='flex flex-col gap-w mt-2 text-sm p-[30px] border-[2px] border-[#4d8890]'>
             <div className='flex justify-between text-white text-[18px] p-[10px]'>
             <p>Subtotal</p>
-            <p>{currency} {getCartAmount()}.00</p>
+            <p>{currency} .00</p>
             </div>
         
         <hr />
@@ -24,8 +26,9 @@ function CartTotal() {
 
         <div className='flex justify-between text-white test-[18px] p-[10px]'>
             <b>Total</b>
-            <b>{currency} {getCartAmount()===0?0:getCartAmount()+delivery_fee}</b>
+            <b>{currency} {getCartAmount()===0?0:getCartAmount()+delivery_fee}.00</b>
         </div>
+        
         </div>
       
     </div>

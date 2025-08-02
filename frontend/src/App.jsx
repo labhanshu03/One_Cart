@@ -14,6 +14,7 @@ import { useContext } from "react"
 import { Navigate } from "react-router-dom"
 import ProductDetail from "./pages/ProductDetail.jsx"
 import Cart from "./pages/Cart.jsx"
+import PlaceOrder from "./pages/PlaceOrder.jsx"
 
 function App(){
   let {userData}=useContext(UserDataContext)
@@ -31,6 +32,7 @@ function App(){
     <Route path="/contact" element={userData ? <Contact /> : <Navigate to ="/login" state={{from:location.pathname}} /> }></Route>
     <Route path="/productdetail/:productId" element={userData ? <ProductDetail /> : <Navigate to ="/login" state={{from:location.pathname}} /> }></Route>
     <Route path="/cart" element={userData ? <Cart/> : <Navigate to ="/login" state={{from:location.pathname}} /> }></Route>
+    <Route path="/placeorder" element={userData ? <PlaceOrder/> : <Navigate to ="/login" state={{from:location.pathname}} /> }></Route>
 
   </Routes>
 
