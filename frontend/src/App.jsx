@@ -15,6 +15,7 @@ import { Navigate } from "react-router-dom"
 import ProductDetail from "./pages/ProductDetail.jsx"
 import Cart from "./pages/Cart.jsx"
 import PlaceOrder from "./pages/PlaceOrder.jsx"
+import Order from "./pages/Order.jsx"
 
 function App(){
   let {userData}=useContext(UserDataContext)
@@ -33,6 +34,7 @@ function App(){
     <Route path="/productdetail/:productId" element={userData ? <ProductDetail /> : <Navigate to ="/login" state={{from:location.pathname}} /> }></Route>
     <Route path="/cart" element={userData ? <Cart/> : <Navigate to ="/login" state={{from:location.pathname}} /> }></Route>
     <Route path="/placeorder" element={userData ? <PlaceOrder/> : <Navigate to ="/login" state={{from:location.pathname}} /> }></Route>
+    <Route path="/order" element={userData ? <Order/> : <Navigate to ="/login" state={{from:location.pathname}} /> }></Route>
 
   </Routes>
 
