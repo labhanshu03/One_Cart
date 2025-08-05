@@ -4,7 +4,7 @@ import { useState } from 'react'
 import CartTotal from '../components/CartTotal'
 import razorpay from "../assets/razorpay.jpg"
 import { shopDataContext } from '../../context/shopContext'
-import { authDataContext } from '../../context/authContext'
+import { authDataContext } from '../../context/AuthContext.jsx'
 import axios from "axios"
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
