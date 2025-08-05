@@ -5,7 +5,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { UserDataContext } from "../../context/UserContext";
 import { IoSearchCircle } from "react-icons/io5";
-import { authDataContext } from "../../context/authContext";
+import { authDataContext } from "../../context/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { IoMdHome } from "react-icons/io";
