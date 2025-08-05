@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import Title from '../components/Title'
 import { useState } from 'react'
 import CartTotal from '../components/CartTotal'
-import razorpay from "../assets/razorpay.jpg"
+import razorpay from "../assets/Razorpay.jpg"
 import { shopDataContext } from '../../context/shopContext'
 import { authDataContext } from '../../context/AuthContext.jsx'
 import axios from "axios"
