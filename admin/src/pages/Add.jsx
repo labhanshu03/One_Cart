@@ -4,6 +4,8 @@ import Sidebar from "../components/Sidebar.jsx"
 import upload from "../assets/upload image.jpg"
 import { authDataContext } from '../context/AuthContext.jsx'
 import axios from "axios"
+import Loading from "../components/Loading.jsx"
+import {toast } from "react-toastify"
 function Add() {
   let[image1,setImage1]=useState(false)
   let[image2,setImage2]=useState(false)
@@ -13,13 +15,16 @@ function Add() {
   const[description,setDescription]=useState("")
   const[category,setCategory]=useState("Men")
   const[price,setPrice]=useState("")
-  const[subCategory,setSubcategory]=useState("Topwear")
+  const[subCategory,setSubcategory]=useState("TopWear")
   const[bestSeller,setBestSeller]=useState(false)
   const[sizes,setSizes]=useState([])
   let {serverUrl}=useContext(authDataContext)
+  const[loading,setLoading]=useState(false)  
+  
 
 
   const handleAddProduct =async(e)=>{
+    setLoading(true)
            e.preventDefault()
            try{
             let formData= new FormData()
@@ -38,6 +43,8 @@ function Add() {
             let result=await axios.post(serverUrl  +"/api/products/addproduct" ,formData,{withCredentials:true})
 
              console.log(result.data)
+             toast.success("ADD Product successfully")
+             setLoading(false)
              if(result.data){
                 setName("")
                   setDescription("")
@@ -52,6 +59,8 @@ function Add() {
              }
            }catch(error){
               console.log(error)
+              setLoading(false)
+              toast.error("Add product failed")
            }
            
   }
@@ -166,7 +175,7 @@ function Add() {
                        </div>
 
 
-            <button className='w-[140px] px-[20px] py-[20px] rounded-xl bg-[#65d8f7] felx items-center justify-center gap-[10px] text-black active:bg-slate-700 active:text-white active:border-[2px] border-white'>Add Product</button>
+            <button className='w-[140px] px-[20px] py-[20px] rounded-xl bg-[#65d8f7] felx items-center justify-center gap-[10px] text-black active:bg-slate-700 active:text-white active:border-[2px] border-white'>{loading?<Loading />:"Add product"}</button>
           </form>
       </div>
       

@@ -10,6 +10,7 @@ import { useContext } from "react";
 import { signInWithPopup } from "firebase/auth";
 import {auth,provider} from "../../utils/Firebase.js"
 import {UserDataContext} from "../../context/UserContext.jsx"
+import Loading from "../components/Loading.jsx";
 
 
 
@@ -21,9 +22,11 @@ function Registration(){
     let [password,setPassword]=useState("")
     let [email,setEmail]=useState("")
   let {getCurrentUser}=useContext(UserDataContext)
+    let[loading,setLoading]=useState(false)
    let navigate=useNavigate()
 
     const handleSignup = async (e)=>{
+      setLoading(true)
         e.preventDefault()
       try{
               const result=await axios.post(serverUrl +'api/auth/registration',{
@@ -31,15 +34,19 @@ function Registration(){
               },{withCredentials:true})
 
               console.log(result.data)
+              
  getCurrentUser()
+ setLoading(false)
                     navigate("/")
 
       }catch(error){
+        setLoading(false)
                 console.log(error)
       }
     }
 
     const googleSignup = async (e)=>{
+      setLoading(true)
          
           try{
                 const response=await signInWithPopup(auth,provider)
@@ -52,8 +59,10 @@ function Registration(){
                 const result=await axios.post(serverUrl+"api/auth/googlelogin" ,{name,email},{withCredentials:true})
                 console.log(result.data)
                 getCurrentUser()
+                setLoading(false)
                 navigate("/")
           }catch(error){
+            setLoading(false)
                console.log(error)
           }
     }
@@ -82,7 +91,7 @@ function Registration(){
         <input type={show?"text":"password"} className="w-[100%] h-[50px] border-[2px] border-[#96969635] backdrop-blur-sm rounded-lg shadow-lg bg-transparent placeholder-[#ffffffc7] px-[20px] font-semibold " placeholder="Password" required onChange={(e)=>setPassword(e.target.value)} value={password}/>
         {!show && <IoEyeOutline className="w-[20px] h-[20px] absolute right-[5%]" onChange={()=>{setShow(prev => !prev)}}/>}
         {show && <IoEye className="w-[20px] h-[20px] absolute right-[5%]"  onChange={()=>{setShow(prev => !prev)}} />}
-        <button className="w-[100%] h-[50px] bg-[#6060f5] rounded-lg flex items-center justify-center mt-[20px] text-[17px] font-semibold">Create Account</button>
+        <button className="w-[100%] h-[50px] bg-[#6060f5] rounded-lg flex items-center justify-center mt-[20px] text-[17px] font-semibold">{loading?<Loading/>:"Register"}</button>
         <p className="flex gap-[10px] ">You have any account<span className="text-[#5555f6cf] text-[17px] font-semibold cursor-pointer" onClick={()=>navigate("/login")}>Login</span></p>
      </div>
 

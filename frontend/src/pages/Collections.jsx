@@ -5,7 +5,10 @@ import Title from "../components/Title.jsx"
 import Card from "../components/Card.jsx"
 import {shopDataContext} from "../../context/shopContext.jsx"
 
+
+
 function Collections() {
+let [loading,setLoading] =useState(false)
 let [showFilter,setShowFiter]=useState(false)
 let {products,search,showSearch}=useContext(shopDataContext)
 let [filterProduct,setFilterProduct]=useState([])

@@ -31,15 +31,50 @@ function PlaceOrder() {
     phone:""
   })
 
+  
+
+  const initPay=(order)=>{
+    setLoading(true)
+    const options={
+      key:import.meta.env.VITE_RAZORPAY_KEY_ID,
+      amount:order.amount,
+      currency:order.currency,
+      name:"Order Payment",
+      description:"Order Payment",
+      order_id:order.id,
+      receipt:order.receipt,
+      handler:async(response)=>{
+        console.log(response)
+        
+        const {data}=await axios.post(serverUrl+"api/order/verifyrazorpay" ,response,{withCredentials:true})
+        if(data){
+          setLoading(false)
+          toast.success("order placed successfully")
+          
+          navigate("/order")
+          setCartItem({})
+
+        }
+
+      }
+    }
+     const rzp=new window.Razorpay(options)
+        rzp.open()
+
+  }
+
   const onChangeHandler=(e)=>{
+
     const name=e.target.name
     const value=e.target.value
     setFormData(data=>({...data,[name]:value}))
   }
 
   const onSubmitHandler=async(e)=>{
+    setLoading(true)
     e.preventDefault()
     try{
+      
         let orderItems=[]
         for(const items in cartItem){
           for(const item in cartItem[items]){
@@ -65,11 +100,23 @@ function PlaceOrder() {
             console.log(result.data)
             if(result.data){
               setCartItem({})
+              setLoading(false)
+              toast.success("order placed successfully")
               navigate("/order")
             }else{
+              toast.success("order not placed")
+              setLoading(false)
               console.log(result.data.message)
             }
             break;
+
+            case "razorpay":
+              const resultRazorpay=await axios.post(serverUrl+"api/order/razorpay" ,orderData,{withCredentials:true})
+              if(resultRazorpay.data){
+                console.log(resultRazorpay.data)
+                initPay(resultRazorpay.data)
+              }
+
 
             default:
               break;
@@ -78,6 +125,7 @@ function PlaceOrder() {
         }
          
     }catch(error){
+      setLoading(false)
                console.log(error)
                toast.error(error.message)
     }

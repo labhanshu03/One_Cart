@@ -1,15 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { use, useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { shopDataContext } from '../../context/shopContext.jsx'
 import { FaStar } from "react-icons/fa";
 import { FaStarHalfAlt } from "react-icons/fa";
 import RelatedProduct from '../components/RelatedProduct.jsx';
-// import Loading from '../component/Loading';
+import Loading from "../components/Loading.jsx"
+import {toast,ToastContainer} from "react-toastify"
 
 function ProductDetail() {
     let {productId} = useParams()
     let {products,currency ,addtoCart ,loading} = useContext(shopDataContext)
     let [productData,setProductData] = useState(false)
+
 
     const [image, setImage] = useState('')
   const [image1, setImage1] = useState('')
@@ -87,7 +89,7 @@ function ProductDetail() {
               ))
             }
           </div>
-           <button onClick={()=>addtoCart(productData._id,size)} className='text-[16px] active:bg-slate-500 cursor-pointer bg-[#495b61c9] py-[10px] px-[20px] rounded-2xl mt-[10px] border-[1px] border-[#80808049] text-white shadow-md shadow-black' onClick={()=>addtoCart(productData._id , size)} >{loading? <Loading/> : "Add to Cart"}</button>
+           <button  className='text-[16px] active:bg-slate-500 cursor-pointer bg-[#495b61c9] py-[10px] px-[20px] rounded-2xl mt-[10px] border-[1px] border-[#80808049] text-white shadow-md shadow-black' onClick={()=>addtoCart(productData._id , size)} >{loading? <Loading/> : "Add to Cart"}</button>
                 </div>
             <div className='w-[90%] h-[1px] bg-slate-700'></div>
             <div className='w-[80%] text-[16px] text-white '>

@@ -7,6 +7,7 @@ import axios from "axios"
 import { UserDataContext } from "./UserContext"
 import { toast } from 'react-toastify';
 
+
 export const shopDataContext =createContext()
 
 function ShopContext({children}){
@@ -18,8 +19,10 @@ function ShopContext({children}){
     let [search,setSearch]=useState("")
     let[showSearch,setShowSearch]=useState(false)
     let [cartItem,setCartItem]=useState({})
+    let[loading,setLoading]=useState(false)
   
 const addtoCart=async(itemId,size)=>{
+    setLoading(true)
                 if(!size){
                     console.log("select product size")
                     return ;
@@ -48,7 +51,9 @@ const addtoCart=async(itemId,size)=>{
             
           let result=  await axios.post(serverUrl +"api/cart/add" ,{itemId,size},{withCredentials:true})
             console.log(result.data)
+            setLoading(false)
         }catch(error){
+            setLoading(false)
               console.log(error.message)
               
         }
@@ -153,7 +158,7 @@ const getCartAmount=()=>{
       
 
     let value={
-        products,currency,delivery_fee,getProducts ,search,setSearch,showSearch,setShowSearch,cartItem,addtoCart,getCartCount,setCartItem,updateQuantity,getCartAmount
+        products,currency,delivery_fee,getProducts ,search,setSearch,showSearch,setShowSearch,cartItem,addtoCart,getCartCount,setCartItem,updateQuantity,getCartAmount,loading
     }
     return(
            <div>
