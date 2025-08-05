@@ -21,7 +21,7 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(cookieParser())
 app.use(cors({
-    origin:["https://one-cart-frontendtwo.onrender.com","http://localhost:5174"],
+    origin:["https://one-cart-frontendtwo.onrender.com","https://one-cart-admin-a05l.onrender.com"],
     credentials:true
 }))
 
