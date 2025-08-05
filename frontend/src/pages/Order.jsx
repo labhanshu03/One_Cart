@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Title from "../components/Title.jsx"
 import { shopDataContext } from '../../context/shopContext.jsx'
-import {authDataContext} from "../../context/authContext.jsx"
+import {authDataContext} from "../../context/AuthContext.jsx"
 import axios from 'axios'
 
 function Order() {
