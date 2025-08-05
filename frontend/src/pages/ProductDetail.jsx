@@ -1,4 +1,4 @@
-import React, { use, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { shopDataContext } from '../../context/shopContext.jsx'
 import { FaStar } from "react-icons/fa";

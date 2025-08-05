@@ -16,7 +16,7 @@ import ProductDetail from "./pages/ProductDetail.jsx"
 import Cart from "./pages/Cart.jsx"
 import PlaceOrder from "./pages/PlaceOrder.jsx"
 import Order from "./pages/Order.jsx"
-import {toast,ToastContainer} from "react-toastify"
+import {ToastContainer} from "react-toastify"
 import NotFound from "./pages/NotFound.jsx"
 import Ai from "./components/Ai.jsx"
 

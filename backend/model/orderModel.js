@@ -28,6 +28,10 @@ const orderSchema=new mongoose.Schema({
     date:{
         type:Number,
         required:true
+    },
+    paymentMethod:{
+        type:String,
+        required:true
     }
 },{timeStamp:true})
 

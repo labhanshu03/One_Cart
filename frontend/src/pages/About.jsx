@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Title from "../components/Title.jsx"
 import about from '../assets/about.jpg'
 import NewLetterBox from "../components/NewLetterBox.jsx"

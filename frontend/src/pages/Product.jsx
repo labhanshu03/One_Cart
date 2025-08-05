@@ -9,7 +9,7 @@ function Product() {
             <LatestCollection />
            </div>
            <div className='w-[100%] min-h-[70px] flex items-center justify-center gap-[10px] flex-col'> 
-           <BestSeller></BestSeller>
+           <BestSeller/>
            </div>
     </div>
   )

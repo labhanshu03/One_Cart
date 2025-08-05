@@ -1,4 +1,4 @@
-import React, { useContext ,useState} from 'react'
+import React ,{ useContext ,useState} from 'react'
 import ai from "../assets/ai.png"
 import { shopDataContext } from '../../context/shopContext'
 import {toast} from "react-toastify"

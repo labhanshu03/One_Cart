@@ -1,4 +1,4 @@
-import React,{useContext, useEffect, useState} from 'react'
+import {useContext, useEffect, useState} from 'react'
 import { FaAngleRight } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 import Title from "../components/Title.jsx"
