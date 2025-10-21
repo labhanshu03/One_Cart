@@ -17,8 +17,8 @@ function Login(){
     let [show,setShow]=useState(false)
         let {serverUrl}= useContext(authDataContext)
        
-        let [password,setPassword]=useState("")
-        let [email,setEmail]=useState("")
+        let [password,setPassword]=useState("1234567890")
+        let [email,setEmail]=useState("labhgupta444@gmail.com")
         let {getCurrentUser}=useContext(UserDataContext)
        let navigate=useNavigate()
 
