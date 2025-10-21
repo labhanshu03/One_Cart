@@ -16,8 +16,8 @@ function Login() {
       const[loading,setLoading]=useState(false)  
     let [show,setShow]=useState(false)
             let {serverUrl}= useContext(authDataContext)
-                 let [email,setEmail]=useState("")
-            let [password,setPassword]=useState("")
+                 let [email,setEmail]=useState("admin@onecart.com")
+            let [password,setPassword]=useState("admin1234567")
             let {adminData,getAdmin} =useContext(adminDataContext)
 
             const AdminLogin=async(e)=>{
