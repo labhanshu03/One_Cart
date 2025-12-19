@@ -104,7 +104,7 @@ const updateQuantity=async(itemId,size,quantity)=>{
 
         }catch(error){
             console.log(error.message)
-            // toast.error(error.message)
+            
         }
     }
 
