@@ -14,7 +14,6 @@ A modern, full-featured e-commerce website with hands-free navigation powered by
 
 ### 🎤 Voice Navigation
 - **Hands-Free Shopping**: Navigate the entire platform using voice commands
-- **Natural Language Processing**: Intuitive voice controls that understand everyday language
 - **Accessibility First**: Designed to make online shopping accessible to everyone
 
 ### 🛍️ E-Commerce Functionality
