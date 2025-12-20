@@ -162,6 +162,15 @@ One_Cart/
 │   │   └── services/      # API services
 │   ├── public/            # Static assets
     └── Dockerfile         # Docker file
+├── Admin/                 # Admin Frontend application
+│   ├── src/
+│   │   ├── components/    # Reusable components
+│   │   ├── pages/         # Page components
+│   │   ├── hooks/         # Custom hooks
+│   │   ├── utils/         # Utility functions
+│   │   └── services/      # API services
+│   ├── public/            # Static assets
+│    └── Dockerfile         # Docker file
 ├── server/                # Backend application
 │   ├── controllers/       # Request handlers
 │   ├── models/            # Database models
