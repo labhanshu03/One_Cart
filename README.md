@@ -134,8 +134,8 @@ Before you begin, ensure you have the following installed:
    ```
 
 7. **Access the application**
-   - Frontend: `http://localhost:3000`
-   - Admin Panel: `http://localhost:3000/admin`
+   - Frontend: `http://localhost:3173`
+   - Admin Panel: `http://localhost:3174`
 
 ---
 
