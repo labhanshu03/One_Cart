@@ -54,13 +54,24 @@ Get started with these voice commands:
 ---
 
 ## 🚀 Getting Started
+## 🐳 Docker Setup (Recommended)
 
-### Prerequisites
+One_Cart is fully **Dockerized**, allowing you to run the entire application (Frontend, Backend, Admin Panel, and Database) with a single command.
 
-Before you begin, ensure you have the following installed:
-- Node.js (v14 or higher)
-- npm or yarn
-- Modern web browser with Web Speech API support (Chrome, Edge, Safari)
+---
+
+### 📦 Prerequisites
+
+Make sure you have the following installed:
+
+- Docker (v20 or higher)
+- Docker Compose (v2 or higher)
+
+Check installation:
+```bash
+docker --version
+docker compose version
+```
 
 ### Installation
 
@@ -70,20 +81,7 @@ Before you begin, ensure you have the following installed:
    cd One_Cart
    ```
 
-2. **Install dependencies**
-   ```bash
-   cd admin
-   npm install
 
-   cd backend
-   npm install
-
-   cd frontend
-   npm install
-
-   
-   
-   ```
 
 3. **Set up environment variables**
    ```bash
@@ -114,28 +112,20 @@ Before you begin, ensure you have the following installed:
   RAZORPAY_KEY_ID=RAZORPAY_KEY_ID
    ```
 
-5. **Run database migrations**
-   ```bash
-   npm run migrate
-   # or
-   yarn migrate
+5. **Build and start all services**
+   ```
+   docker compose up --build
    ```
 
-6. **Start the development server**
-   ```bash
-   cd backend
-   npm run dev
-   
-   cd frontend
-   npm run dev
-   
-   cd admin
-   npm run dev
+6. **Run in detached mode(optional)**
+   ```
+   docker compose up -d
    ```
 
 7. **Access the application**
    - Frontend: `http://localhost:3173`
    - Admin Panel: `http://localhost:3174`
+   - Backend API: `http://localhost:8000`
 
 ---
 
@@ -170,16 +160,21 @@ One_Cart/
 │   │   ├── hooks/         # Custom hooks
 │   │   ├── utils/         # Utility functions
 │   │   └── services/      # API services
-│   └── public/            # Static assets
+│   ├── public/            # Static assets
+    └── Dockerfile         # Docker file
 ├── server/                # Backend application
 │   ├── controllers/       # Request handlers
 │   ├── models/            # Database models
 │   ├── routes/            # API routes
 │   ├── middleware/        # Custom middleware
+│   ├── Dockerfile         # Docker file
 │   └── config/            # Configuration files
 ├── .env.example           # Environment variables template
 ├── package.json           # Dependencies
 └── README.md             # Documentation
+└── docker-compose.yaml    #docker-compose
+
+
 ```
 
 ---
