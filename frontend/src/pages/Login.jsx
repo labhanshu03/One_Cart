@@ -28,7 +28,8 @@ function Login(){
               e.preventDefault()
               try{
                 console.log("initiate login")
-                    let result=await axios.post(serverUrl+"api/auth/login",{
+               
+                    let result=await axios.post("/api/auth/login",{
                       email,password
                     },{withCredentials:true})
                     
@@ -53,7 +54,7 @@ function Login(){
                 let name=user.displayName
                 let email=user.email
 
-                const result=await axios.post(serverUrl+"api/auth/googlelogin" ,{name,email},{withCredentials:true})
+                const result=await axios.post("/api/auth/googlelogin" ,{name,email},{withCredentials:true})
                 console.log(result.data)
                 getCurrentUser()
                 setLoading(false)

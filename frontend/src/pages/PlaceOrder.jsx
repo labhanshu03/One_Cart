@@ -46,7 +46,7 @@ function PlaceOrder() {
       handler:async(response)=>{
         console.log(response)
         
-        const {data}=await axios.post(serverUrl+"api/order/verifyrazorpay" ,response,{withCredentials:true})
+        const {data}=await axios.post("/api/order/verifyrazorpay" ,response,{withCredentials:true})
         if(data){
           setLoading(false)
           toast.success("order placed successfully")
@@ -96,7 +96,7 @@ function PlaceOrder() {
 
         switch(method){
           case "cod":
-            const result= await axios.post(serverUrl +"api/order/placeorder",orderData,{withCredentials:true})
+            const result= await axios.post("/api/order/placeorder",orderData,{withCredentials:true})
             console.log(result.data)
             if(result.data){
               setCartItem({})
@@ -111,7 +111,7 @@ function PlaceOrder() {
             break;
 
             case "razorpay":
-              const resultRazorpay=await axios.post(serverUrl+"api/order/razorpay" ,orderData,{withCredentials:true})
+              const resultRazorpay=await axios.post("/api/order/razorpay" ,orderData,{withCredentials:true})
               if(resultRazorpay.data){
                 console.log(resultRazorpay.data)
                 initPay(resultRazorpay.data)

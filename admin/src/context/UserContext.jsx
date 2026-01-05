@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import {useState} from 'react'
 import { createContext } from 'react'
 import { authDataContext } from './AuthContext'
 import { useEffect } from 'react'
@@ -15,7 +15,7 @@ function AdminContext({children}) {
     const getAdmin=async()=>{
         
         try{
-        let result=await axios.get(serverUrl+"/api/user/getadmin",{withCredentials:true})
+        let result=await axios.get("/api/user/getadmin",{withCredentials:true})
         setAdminData(result.data)
     }catch(error){
                 setAdminData(null)

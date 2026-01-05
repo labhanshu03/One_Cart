@@ -15,7 +15,7 @@ function Orders() {
 
     const fetchAllOrders =async () => {
     try {
-      const result = await axios.post(serverUrl + '/api/order/list' , {} ,{withCredentials:true})
+      const result = await axios.post('/api/order/list' , {} ,{withCredentials:true})
       setOrders(result.data.reverse())
       
     } catch (error) {
@@ -23,9 +23,10 @@ function Orders() {
     }
     
   }
-   const statusHandler = async (e , orderId) => {
+  
+  const statusHandler = async (e , orderId) => {
          try {
-          const result = await axios.post(serverUrl + '/api/order/status' , {orderId,status:e.target.value},{withCredentials:true})
+          const result = await axios.post('/api/order/status' , {orderId,status:e.target.value},{withCredentials:true})
           if(result.data){
             await fetchAllOrders()
           }
@@ -34,6 +35,8 @@ function Orders() {
           
          }
   }
+
+  
   useEffect(()=>{
     fetchAllOrders()
   },[])

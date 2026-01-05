@@ -2,6 +2,7 @@
  import User from  "../model/userModel.js" 
  import razorpay from "razorpay"
  import dotenv from "dotenv"
+ import { getChannel } from "../config/rabbitmq.js"
  dotenv.config()
 
  const razorpayInstance=new razorpay({
@@ -27,11 +28,27 @@
             date:Date.now()
         }
 
-        const newOrder=new Order(orderData) 
 
+        const newOrder=new Order(orderData) 
         await newOrder.save()
-        
         await User.findByIdAndUpdate(userId,{cartData:{}})
+
+
+        const channel = getChannel()
+      
+        const routingKey="order.created"
+        const exchange="order.direct"
+
+         
+         channel.publish(exchange,routingKey,Buffer.from(JSON.stringify({
+            orderId:newOrder._id,
+            userId:orderData.userId,
+            email:orderData.address.email,
+            amount:orderData.amount
+
+         })),{ persistent: true })
+         
+
         return res.status(201).json({message:"Order Place"})
 
     }catch(error){
@@ -49,7 +66,7 @@
 
     }catch(error){
         console.log(error)
-        return res.statsu(500).json({message:"userOrders error"})
+        return res.status(500).json({message:"userOrders error"})
     }
  }
 
@@ -126,13 +143,33 @@
  export const verifyRazorpay=async(req,res)=>{
     try{
         const userId=req.userId
-        const{razorpay_order_id}=req.body
+        const {razorpay_order_id}=req.body
         const orderInfo=await razorpayInstance.orders.fetch(razorpay_order_id)
+       
         if(orderInfo.status==="paid"){
+             const orderId=orderInfo.receipt
             await User.findByIdAndUpdate(userId,{cartData:{}})
-            await Order.findByIdAndUpdate(userId,{payment:true})
+            const order = await Order.findByIdAndUpdate(orderId,{payment:true},{new:true})
+
+             const channel = getChannel()
+    const exchange = "order.direct"
+    const routingKey = "order.created"
+
+    channel.publish(
+      exchange,
+      routingKey,
+      Buffer.from(JSON.stringify({
+        orderId: order._id,
+        userId: order.userId,
+        email: order.address.email,
+        amount: order.amount
+      })),
+      { persistent: true }
+    )
+
+    
             res.status(200).json({message:"Payment successfull"})
-            res.status(200).json({message:"Payment Successfull"})
+            
         }
         else{
             res.json({message:"payment failed"})

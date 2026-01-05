@@ -25,7 +25,7 @@ function Login() {
                 e.preventDefault();
                 try{
                     
-                       const result =await axios.post(serverUrl+"/api/auth/adminlogin",{email,password},{withCredentials:true})
+                       const result =await axios.post("/api/auth/adminlogin",{email,password},{withCredentials:true})
                        console.log(result.data)
                        toast.success("Admin login successfully")
                        setLoading(false)

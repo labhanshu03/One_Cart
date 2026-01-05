@@ -9,6 +9,7 @@ import userRoutes from "./routes/userRoutes.js"
 import productRoutes from "./routes/productRoutes.js"
 import cartRoutes from "./routes/cartRoutes.js"
 import orderRoutes from "./routes/orderRoutes.js"
+import { connectRabbitMQ } from "./config/rabbitmq.js"
 dotenv.config()
 let port = process.env.PORT || 6000
 
@@ -20,10 +21,12 @@ app.use(express.json())
 
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(cookieParser())
+
 app.use(cors({
-    origin:["https://one-cart-frontendtwo.onrender.com","https://one-cart-admin-a05l.onrender.com","https://one-cart-frontend-i7m7.onrender.com"],
+    origin:true,
     credentials:true
 }))
+
 
 app.use("/api/auth",authRoutes)
 app.use("/api/user",userRoutes)
@@ -31,10 +34,27 @@ app.use("/api/products",productRoutes)
 app.use("/api/cart",cartRoutes)
 app.use("/api/order",orderRoutes)
 
-app.listen(port,()=>{
-    console.log("server is started")
-    connectDb()
-})
+app.get("/api/health", (req, res) => {
+  res.status(200).send("OK");
+});
+
+
+const startServer=async()=>{        
+
+    try{
+        connectDb()
+        connectRabbitMQ()
+        app.listen(port,"0.0.0.0",()=>{
+            console.log(`server is started on port ${port}`)
+        })
+        
+
+    }catch(err){
+        console.log(err)
+    }
+}
+
+startServer()
 
 
 

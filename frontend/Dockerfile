@@ -1,12 +1,12 @@
-FROM node:20-alpine
+# frontend/Dockerfile
 
+FROM node:20-alpine AS build
 WORKDIR /app
-
 COPY package*.json ./
 RUN npm install
-
 COPY . .
+RUN npm run build
 
-EXPOSE 5173
-
-CMD ["npm","run","dev1"]
+FROM nginx:alpine
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist /usr/share/nginx/html

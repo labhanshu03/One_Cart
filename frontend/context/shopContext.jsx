@@ -47,9 +47,8 @@ const addtoCart=async(itemId,size)=>{
 
     if(userData){
     
-        try{
-            
-          let result=  await axios.post(serverUrl +"api/cart/add" ,{itemId,size},{withCredentials:true})
+        try{    
+          let result=  await axios.post("/api/cart/add" ,{itemId,size},{withCredentials:true})
             console.log(result.data)
             setLoading(false)
         }catch(error){
@@ -80,7 +79,7 @@ const getCartCount=()=>{
 
 const getUserCart=async()=>{
     try{
-        const result =await axios.post(serverUrl+"api/cart/get",{},{withCredentials:true})
+        const result =await axios.post("/api/cart/get",{},{withCredentials:true})
         console.log(result)
         console.log(result.data)
         setCartItem(result.data)
@@ -100,7 +99,7 @@ const updateQuantity=async(itemId,size,quantity)=>{
     if(userData){
         try{
 
-            await axios.post(serverUrl+"api/cart/update",{itemId,size,quantity},{withCredentials:true})
+            await axios.post("/api/cart/update",{itemId,size,quantity},{withCredentials:true})
 
         }catch(error){
             console.log(error.message)
@@ -115,7 +114,7 @@ const updateQuantity=async(itemId,size,quantity)=>{
 
     const getProducts=async ()=>{
         try{
-                let result =await axios.get(serverUrl +`api/products/list`)
+                let result =await axios.get(`/api/products/list`)
                 console.log(result.data )
                 setProducts(result.data)
         }catch(error){

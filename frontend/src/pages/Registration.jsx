@@ -29,7 +29,7 @@ function Registration(){
       setLoading(true)
         e.preventDefault()
       try{
-              const result=await axios.post(serverUrl +'api/auth/registration',{
+              const result=await axios.post('/api/auth/registration',{
                 name,email,password
               },{withCredentials:true})
 
@@ -56,7 +56,7 @@ function Registration(){
                 let name=user.displayName
                 let email=user.email
 
-                const result=await axios.post(serverUrl+"api/auth/googlelogin" ,{name,email},{withCredentials:true})
+                const result=await axios.post("/api/auth/googlelogin" ,{name,email},{withCredentials:true})
                 console.log(result.data)
                 getCurrentUser()
                 setLoading(false)
