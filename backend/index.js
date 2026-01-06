@@ -15,6 +15,7 @@ let port = process.env.PORT || 6000
 
 let app=express()
 
+app.set("trust proxy", 1);
 
 app.use(express.json())
 

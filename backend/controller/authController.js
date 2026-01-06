@@ -3,6 +3,16 @@ import validator from "validator"
 import bcrypt from "bcryptjs"
 import { genToken ,genToken1} from "../config/token.js"
 
+
+
+
+const cookieOptions = {
+  httpOnly: true,
+  secure: false,                         // true only on HTTPS
+  sameSite: "lax",      // lax for HTTP
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+};
+
 export const registration=async (req,res) =>{
   
     try{
@@ -31,12 +41,7 @@ export const registration=async (req,res) =>{
         console.log("user id "   + user._id +" to check if this is an object or a string " + typeof(user._id))
         let token =await genToken(user._id)
 
-        res.cookie("token",token,{
-            httpOnly:true,
-            secure:true,
-            sameSite:"none",
-            maxAge:7*24*60*60*1000
-        })
+        res.cookie("token", token, cookieOptions);
 
         return res.status(201).json(user)
 
@@ -52,21 +57,30 @@ export const login=async(req,res)=>{
          let {email,password}=req.body
          console.log(email)
          console.log(password)
+
          let user=await User.findOne({email})
+         console.log(user)
          if(!user){
             return res.status(404).json({message:"user not found"})
          } 
+         console.log("comparing password")
          let isMatch=await bcrypt.compare(password,user.password)
+         console.log("password compared")
          if(!isMatch){   
             return res.status(400).json({message:"Incorrect password"})
          }
          let token=await genToken(user._id)
-         res.cookie("token",token,{
-              httpOnly:true,
-              secure:true,
-              sameSite:"none",
-              maxAge:7*24*60*60*1000
-         })
+         console.log("token generated")
+
+        //  res.cookie("token",token,{
+        //       httpOnly:true,
+        //       secure:false,
+        //       sameSite:"none",
+        //       maxAge:7*24*60*60*1000
+        //  })
+
+        res.cookie("token", token, cookieOptions);
+            console.log("cookie set")
 
         //  return res.status(201).json({message:"login successfull"})
          return res.status(201).json(user)
@@ -100,12 +114,9 @@ if(!user){
     user= await User.create({name,email})
 }
          let token=await genToken(user._id)
-         res.cookie("token",token,{
-              httpOnly:true,
-              secure:true,
-              sameSite:"none",
-              maxAge:7*24*60*60*1000
-         })
+          
+         res.cookie("token", token, cookieOptions);
+
          return res.status(200).json(user)
         }catch(error){
             console.log("google login error")
@@ -118,12 +129,8 @@ export const adminLogin= async(req,res)=>{
         let{email,password}=req.body
           if(email===process.env.ADMIN_EMAIL && password===process.env.ADMIN_PASSWORD){
             let token=await genToken1(email)
-                     res.cookie("token",token,{
-              httpOnly:true,
-              secure:true,
-              sameSite:"none",
-              maxAge:7*24*60*60*1000
-         })
+                     res.cookie("token", token, cookieOptions);
+
          return res.status(200).json(token)
           }
           return res.status(400).json({message:"Invalid credentials"})
