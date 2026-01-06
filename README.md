@@ -1,4 +1,4 @@
-# One-cart(MERN, Docker,Docker-compose, Nginx, Rabbitmq)
+# One-cart(MERN, Docker,Docker-compose, Nginx, Rabbitmq) Deployed on aws EC2
 # 🛒 One_Cart
 
 ### Speech-Powered E-Commerce Platform
