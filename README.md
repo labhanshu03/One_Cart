@@ -110,6 +110,12 @@ docker compose version
   CLOUDINARY_API_SECRET=CLOUDINARY_API_SECRET
   RAZORPAY_KEY_SECRET=RAZORPAY_KEY_SECRET
   RAZORPAY_KEY_ID=RAZORPAY_KEY_ID
+  RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
+  EMAIL_HOST=smtp.gmail.com
+  EMAIL_PORT=587
+  EMAIL_USER=EMAIL_ID
+  EMAIL_PASS=MAIL_APP_PASSWORD
+
    ```
 
 5. **Build and start all services**
@@ -123,9 +129,10 @@ docker compose version
    ```
 
 7. **Access the application**
-   - Frontend: `http://localhost:3173`
-   - Admin Panel: `http://localhost:3174`
-   - Backend API: `http://localhost:8000`
+   
+   - Frontend: `http://localhost`
+   - Admin Panel: `http://localhost/admin`
+   - Backend API: `http://localhost/api/`
 
 ---
 
@@ -139,8 +146,9 @@ docker compose version
 ### Backend
 - **Node.js** - Runtime environment
 - **Express.js** - Web framework
-- **MongoDB/PostgreSQL** - Database
+- **MongoDB** - Database
 - **JWT** - Authentication
+- **Rabbitmq** - Asynchronous email processing
 
 ### Additional Tools
 - **Razorpay** - Payment processing
@@ -153,7 +161,7 @@ docker compose version
 
 ```
 One_Cart/
-├── client/                 # Frontend application
+├── frontend/                 # Frontend application
 │   ├── src/
 │   │   ├── components/    # Reusable components
 │   │   ├── pages/         # Page components
@@ -162,7 +170,7 @@ One_Cart/
 │   │   └── services/      # API services
 │   ├── public/            # Static assets
     └── Dockerfile         # Docker file
-├── Admin/                 # Admin Frontend application
+├── admin/                 # Admin Frontend application
 │   ├── src/
 │   │   ├── components/    # Reusable components
 │   │   ├── pages/         # Page components
@@ -171,15 +179,15 @@ One_Cart/
 │   │   └── services/      # API services
 │   ├── public/            # Static assets
 │    └── Dockerfile         # Docker file
-├── server/                # Backend application
+├── backend/                # Backend application
 │   ├── controllers/       # Request handlers
 │   ├── models/            # Database models
 │   ├── routes/            # API routes
 │   ├── middleware/        # Custom middleware
 │   ├── Dockerfile         # Docker file
 │   └── config/            # Configuration files
-├── .env.example           # Environment variables template
-├── package.json           # Dependencies
+├── nginx/
+│   └── default.conf
 └── README.md             # Documentation
 └── docker-compose.yaml    #docker-compose
 
