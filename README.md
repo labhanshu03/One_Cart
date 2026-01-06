@@ -1,4 +1,4 @@
-# One-cart(MERN, Docker,Docker-compose, nginx, Rabbitmq)
+# One-cart(MERN, Docker,Docker-compose, Nginx, Rabbitmq)
 # 🛒 One_Cart
 
 ### Speech-Powered E-Commerce Platform
